@@ -36,3 +36,52 @@
     transform: rotate(360deg);
   }
 }
+.game-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 95vh;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+}
+.left {
+  grid-column: 1;
+  align-self: end;
+  justify-self: start;
+}
+.right {
+  grid-column: 2;
+  align-self: end;
+  justify-self: end;
+}
+
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+}
+.score-text {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 5rem;
+}
+.rules{
+    position: absolute;
+  top: 10%;
+  right: 10%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: bold;
+  border: 2px solid white;
+  padding: 1rem;
+  cursor: pointer
+}
