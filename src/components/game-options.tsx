@@ -1,91 +1,48 @@
-import { FaHandPaper } from "react-icons/fa";
-import { FaHandRock } from "react-icons/fa";
-import { FaHandScissors } from "react-icons/fa";
-import { FaHandSpock } from "react-icons/fa6";
-import { FaHandLizard } from "react-icons/fa";
+import * as motion from "motion/react-client";
 import { IconType } from "react-icons";
-import { fetchChoices } from "../api/get-choices";
-import { useEffect, useState } from "react";
 import { GiCardRandom } from "react-icons/gi";
-import { fetchChoice } from "../api/get-choice";
+//STORE
+import { useBoard } from "../store/boardStore";
+import { useEffect } from "react";
 
 interface IGameOptionsProps {
   getResult: (choiceId: number) => void;
+  getRandomChoice: ()=>void
 }
 
-const icons = [
-  FaHandRock,
-  FaHandPaper,
-  FaHandScissors,
-  FaHandLizard,
-  FaHandSpock,
-];
-
-const GameOptions = ({ getResult }: IGameOptionsProps) => {
-  const [options, setOptions] = useState<
-    {
-      Icon: IconType;
-      choiceId: number;
-      name: string;
-    }[]
-  >();
-  const [randomChoice, setRandomChoice] = useState<{
-    choiceId: number;
-    name: string;
-  } | null>(null);
-
-  const getOptions = async () => {
-    const result = await fetchChoices();
-    if (result) {
-      const merged = result.map((choice: { name: string; id: number }) => {
-        const Icon = icons?.find((icon: IconType) =>
-          String(icon)
-            ?.toLowerCase()
-            ?.includes(choice?.name?.toLocaleLowerCase())
-        )!;
-
-        return {
-          choiceId: choice.id,
-          name: choice.name,
-          Icon,
-        };
-      });
-
-      setOptions(merged);
-    }
-  };
-
-  const getRandomChoice = async () => {
-    const result = await fetchChoice();
-    if (result) {
-      setRandomChoice(result);
-      getResult(result?.choiceId)
-    }
-  };
+const GameOptions = ({ getResult, getRandomChoice }: IGameOptionsProps) => {
+  const { options, fetchOptions } = useBoard();
 
   useEffect(() => {
-    getOptions();
+    fetchOptions();
   }, []);
 
   return (
-    <div className="flex flex-col gap-3 justify-center items-center p-2">
-      <GiCardRandom
-        className="cursor-pointer hover:text-yellow-200 border border-2"
-        onClick={() => getRandomChoice()}
-      />
+    <div className="flex gap-3 justify-center items-center p-2">
+      <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+        <GiCardRandom
+          className="cursor-pointer hover:text-[#b17f53] border border-2"
+          size={"2em"}
+          onClick={getRandomChoice}
+        />
+      </motion.div>
       {options &&
-        options?.map(
+        options.map(
           (
             { Icon, choiceId }: { Icon: IconType; choiceId: number },
             index: number
           ) => (
-            <Icon
+            <motion.div
               key={index}
-              className={`cursor-pointer hover:text-yellow-200 ${
-                randomChoice?.choiceId === choiceId && "text-yellow-200"
-              }`}
-              onClick={() => getResult(choiceId)}
-            />
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.8 }}
+            >
+              <Icon
+                className="cursor-pointer hover:text-[#b17f53]"
+                size={"2em"}
+                onClick={() => getResult(choiceId)}
+              />
+            </motion.div>
           )
         )}
     </div>

@@ -1,26 +1,14 @@
-import React from "react";
-import logo from "./logo.svg";
+//COMPONENTS
+import Layout from "./components/layout";
+
 import "./App.css";
-import GameBoard from "./components/game-board";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header" title="RPSSL">
+    <div>
+      <header className="header">
         <title>RPSSL</title>
-        {/* <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-        <GameBoard />
+        <Layout />
       </header>
     </div>
   );
