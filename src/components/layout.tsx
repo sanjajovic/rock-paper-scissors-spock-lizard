@@ -48,7 +48,7 @@ const GameBoard = () => {
       <div className="score-text">
         <p className="md:p-5 text-xl md:text-5xl">
           Round: {rounds} <br />
-          Score: {users[0]?.score} - {users[1]?.score}
+          Score: {users[1]?.score} - {users[0]?.score} 
         </p>
       </div>
       <motion.div
