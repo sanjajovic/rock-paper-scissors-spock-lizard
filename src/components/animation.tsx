@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { IconType } from "react-icons";
+import useWindowSize from "../hooks/useWindowSize";
 
 const Animation = ({
   Choice,
@@ -10,12 +11,19 @@ const Animation = ({
   isWinner: boolean;
   startPos: { x: number; y: number };
 }) => {
+  const { height } = useWindowSize();
+
   return (
     <motion.div
-      initial={{ x: startPos.x, y: startPos.y, scale: 0.5, rotate: 0 }}
+      initial={{
+        x:  startPos.x,
+        y: height / 2 - 300,
+        scale: 0.5,
+        rotate: 0,
+      }}
       animate={{
-        x: startPos.x > 0 ? +200 : -150,
-        y: -100,
+        x: startPos.x > 0 ? startPos.x - (startPos.x/3) : startPos.x + (startPos.x/-3),
+        y: -height / 8,
         scale: 4,
         rotate: isWinner ? [0, 360] : [0, 30],
       }}
@@ -23,7 +31,9 @@ const Animation = ({
       className="absolute"
     >
       <Choice
-        className={`text-6xl ${isWinner && "animate-pulse text-[#929a68]"}`}
+        className={`text-3xl md:text-6xl ${
+          isWinner && "animate-pulse text-[#929a68]"
+        }`}
       />
     </motion.div>
   );

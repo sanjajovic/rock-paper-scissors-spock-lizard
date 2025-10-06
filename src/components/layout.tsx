@@ -46,7 +46,7 @@ const GameBoard = () => {
   return (
     <div className="game-container">
       <div className="score-text">
-        <p className=" p-5 text-5xl">
+        <p className="md:p-5 text-xl md:text-5xl">
           Round: {rounds} <br />
           Score: {users[0]?.score} - {users[1]?.score}
         </p>
@@ -67,6 +67,7 @@ const GameBoard = () => {
         rel="noopener noreferrer"
         whileHover={{ scale: 1.2 }}
         style={rules}
+        className="text-md md:text-5xl"
       >
         Rules <FaExternalLinkAlt />
       </motion.a>
@@ -78,7 +79,7 @@ const GameBoard = () => {
           transition={{ duration: 0.5 }}
           className="avatar-container"
         >
-          <GiNinjaHead size={"6em"} />
+          <GiNinjaHead className="text-[4em]" />
         </motion.div>
       </div>
       <div className="right">
@@ -89,26 +90,32 @@ const GameBoard = () => {
           transition={{ duration: 0.5 }}
           className="avatar-container"
         >
-          <FaRedditAlien size={"6em"} />
+          <FaRedditAlien className="text-[4em]" />
         </motion.div>
       </div>
       {outcome ? (
-        <div className="center-text">
-          <Board
-            results={outcome.results}
-            player={outcome.player}
-            computer={outcome.computer}
-            handlePlayAgain={() => setOutcome(null)}
-          />
-        </div>
+        <>
+          <div className="center-text">
+            <Board
+              results={outcome.results}
+              player={outcome.player}
+              computer={outcome.computer}
+            />
+            <div className="flex flex-col w-[max-content] gap-3 items-center bold text-lg md:text-3xl lg:text-5xl justify-self-center self-end bottom-20">
+              <p>YOU {outcome.results.toUpperCase()}</p>
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+                className="text-md bold border border-black rounded-md p-2 cursor-pointer"
+                onClick={() => setOutcome(null)}
+              >
+                PLAY AGAIN
+              </motion.div>
+            </div>
+          </div>
+        </>
       ) : (
-        <div className="middle">
-          <p className="bold text-5xl">Pick a hand</p>
-          <GameOptions
-            getResult={getResult}
-            getRandomChoice={getRandomChoice}
-          />
-        </div>
+        <GameOptions getResult={getResult} getRandomChoice={getRandomChoice} />
       )}
     </div>
   );

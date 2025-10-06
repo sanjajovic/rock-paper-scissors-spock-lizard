@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 interface IGameOptionsProps {
   getResult: (choiceId: number) => void;
-  getRandomChoice: ()=>void
+  getRandomChoice: () => void;
 }
 
 const GameOptions = ({ getResult, getRandomChoice }: IGameOptionsProps) => {
@@ -17,17 +17,17 @@ const GameOptions = ({ getResult, getRandomChoice }: IGameOptionsProps) => {
     fetchOptions();
   }, []);
 
-  return (
-    <div className="flex gap-3 justify-center items-center p-2">
-      <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
-        <GiCardRandom
-          className="cursor-pointer hover:text-[#b17f53] border border-2"
-          size={"2em"}
-          onClick={getRandomChoice}
-        />
-      </motion.div>
-      {options &&
-        options.map(
+  return options.length ? (
+    <div className="middle">
+      <p className="bold text-2xl xl:text-5xl">Pick a hand</p>
+      <div className="flex gap-3 justify-center items-center p-2">
+        <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+          <GiCardRandom
+            className="cursor-pointer hover:text-[#b17f53] border border-2 text-[2em]"
+            onClick={getRandomChoice}
+          />
+        </motion.div>
+        {options.map(
           (
             { Icon, choiceId }: { Icon: IconType; choiceId: number },
             index: number
@@ -38,14 +38,14 @@ const GameOptions = ({ getResult, getRandomChoice }: IGameOptionsProps) => {
               whileTap={{ scale: 0.8 }}
             >
               <Icon
-                className="cursor-pointer hover:text-[#b17f53]"
-                size={"2em"}
+                className="cursor-pointer hover:text-[#b17f53] text-[2em]"
                 onClick={() => getResult(choiceId)}
               />
             </motion.div>
           )
         )}
+      </div>
     </div>
-  );
+  ) : null;
 };
 export default GameOptions;
