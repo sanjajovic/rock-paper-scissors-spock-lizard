@@ -26,7 +26,7 @@ const Animation = ({
         x: startPos.x > 0 ? startPos.x - (startPos.x/3) : startPos.x + (startPos.x/-3),
         y: -height / 8,
         scale: 4,
-        rotate: isWinner ? [0, 360] : [0, 30],
+        rotate: isWinner ? [0, 360] : [0, 0],
       }}
       transition={{ duration: 1 }}
       className="absolute"
