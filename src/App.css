@@ -45,7 +45,6 @@
   display: flex;
   justify-content: center;
   align-items: baseline;
-  right: 37%;
   font-size: 24px;
   font-weight: bold;
 }
@@ -84,7 +83,6 @@
   .score-text {
     position: absolute;
     top: 10%;
-    right: 55%;
     width: max-content;
   }
   .center-text {
@@ -100,6 +98,9 @@
   .score-text {
     right: 0;
     left: 0;
+  }
+  .center-text {
+    right: 37%;
   }
 }
 
@@ -126,5 +127,12 @@
     grid-column: 3;
     grid-row: 3;
   }
-
+  .center-text {
+    right: 37%;
+  }
+  .score-text {
+    align-self: center;
+    position: initial;
+    width: auto;
+  }
 }

@@ -1,8 +1,10 @@
 import { create } from "zustand";
+//DATA ACCESS
+import { fetchChoices } from "../api/get-choices";
+//CONSTANTS
+import { MoveOptions } from "../constants/moveOptions";
 //TYPES
 import { BoardState, IOptionsData } from "../libs/types";
-import { fetchChoices } from "../api/get-choices";
-import { MoveOptions } from "../constants/moveOptions";
 
 export const useBoard = create<BoardState>((set, get) => ({
   users: [

@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import * as motion from "motion/react-client";
 import { IconType } from "react-icons";
 import { GiCardRandom } from "react-icons/gi";
 //STORE
 import { useBoard } from "../store/boardStore";
-import { useEffect } from "react";
 
 interface IGameOptionsProps {
   getResult: (choiceId: number) => void;
